@@ -10,7 +10,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "ASJ Academy — Swiss",
+  title: "ASJ Academy",
   description: "ASJ Academy Swiss International rebuild",
 };
 

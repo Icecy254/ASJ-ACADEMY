@@ -441,7 +441,6 @@ export default function Page() {
                   </div>
                   <div className="p-4">
                     <div className="font-black uppercase tracking-tighter text-sm leading-none">{r.label}</div>
-                    <div className="mt-1 font-mono text-xs tracking-widest uppercase opacity-60 truncate">{r.url}</div>
                     <span className="mt-3 inline-flex h-8 items-center gap-1.5 border-2 border-black bg-black text-white px-3 font-mono text-xs font-black uppercase tracking-widest group-hover:bg-white group-hover:text-black">Watch <ArrowUpRight size={12} /></span>
                   </div>
                 </a>
@@ -554,17 +553,17 @@ export default function Page() {
               <div className="lg:col-span-5 bg-white p-6 md:p-8 border-b-2 lg:border-b-0 lg:border-r-2 border-black">
                 <h3 className="uppercase font-black tracking-tighter text-[18px]">CONTACT INFORMATION</h3>
                 <div className="mt-6 space-y-0 border-2 border-black divide-y-2 divide-black">
-                  <a href="mailto:archeevlog2023@gmail.com" className="flex gap-4 p-4 hover:bg-black hover:text-white transition-colors cursor-pointer group">
+                  <a href="mailto:archeevlog2023@gmail.com" className="flex gap-4 p-4 min-w-0 hover:bg-black hover:text-white transition-colors cursor-pointer group">
                     <span className="h-10 w-10 grid place-items-center border-2 border-black bg-[#F2F2F2] group-hover:bg-white group-hover:text-black shrink-0"><Mail size={16} strokeWidth={2} /></span>
-                    <span><span className="block font-mono text-[10px] tracking-widest uppercase font-black opacity-60">Email</span><span className="font-black uppercase tracking-wide text-sm">archeevlog2023@gmail.com</span></span>
+                    <span className="min-w-0 flex-1 overflow-hidden"><span className="block font-mono text-[10px] tracking-widest uppercase font-black opacity-60">Email</span><span className="block font-black uppercase tracking-wide text-[13px] sm:text-sm break-all leading-tight">archeevlog2023@gmail.com</span></span>
                   </a>
-                  <a href="tel:+819054923865" className="flex gap-4 p-4 hover:bg-black hover:text-white transition-colors cursor-pointer group">
+                  <a href="tel:+819054923865" className="flex gap-4 p-4 min-w-0 hover:bg-black hover:text-white transition-colors cursor-pointer group">
                     <span className="h-10 w-10 grid place-items-center border-2 border-black bg-[#F2F2F2] group-hover:bg-white group-hover:text-black shrink-0"><Phone size={16} strokeWidth={2} /></span>
-                    <span><span className="block font-mono text-[10px] tracking-widest uppercase font-black opacity-60">Phone</span><span className="font-black uppercase tracking-wide text-sm">+81 90-5492-3865</span></span>
+                    <span className="min-w-0 flex-1 overflow-hidden"><span className="block font-mono text-[10px] tracking-widest uppercase font-black opacity-60">Phone</span><span className="block font-black uppercase tracking-wide text-sm">+81 90-5492-3865</span></span>
                   </a>
-                  <a href="https://maps.app.goo.gl/4BkzWhFpptf6zaVUA" target="_blank" rel="noreferrer" className="flex gap-4 p-4 hover:bg-black hover:text-white transition-colors cursor-pointer group">
+                  <a href="https://maps.app.goo.gl/4BkzWhFpptf6zaVUA" target="_blank" rel="noreferrer" className="flex gap-4 p-4 min-w-0 hover:bg-black hover:text-white transition-colors cursor-pointer group">
                     <span className="h-10 w-10 grid place-items-center border-2 border-black bg-[#F2F2F2] group-hover:bg-white group-hover:text-black shrink-0"><MapPin size={16} strokeWidth={2} /></span>
-                    <span><span className="block font-mono text-[10px] tracking-widest uppercase font-black opacity-60">Location</span><span className="font-black uppercase tracking-wide text-sm">Gifu, Japan</span></span>
+                    <span className="min-w-0 flex-1 overflow-hidden"><span className="block font-mono text-[10px] tracking-widest uppercase font-black opacity-60">Location</span><span className="block font-black uppercase tracking-wide text-sm">Gifu, Japan</span></span>
                   </a>
                 </div>
                 <div className="mt-6 flex gap-2">
