@@ -100,7 +100,7 @@ export default function PlacementPage() {
                   </div>
                 </div>
               )}
-              <div className="mt-auto pt-8 font-mono text-xs tracking-widest uppercase text-white/40">Swiss Diagnostic • Flat • No radius • Objective</div>
+              <div className="mt-auto pt-8" />
             </div>
           </div>
           <div className="mt-6 flex flex-wrap gap-3">

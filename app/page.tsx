@@ -26,11 +26,14 @@ import {
   ChevronLeft,
   ChevronRight,
   ClipboardCheck,
+  Globe,
+  Plane,
+  Mic,
 } from "lucide-react"
 
 const courses = [
-  { level: "N5", type: "individual", title: "Beginner Japanese", desc: "Hiragana, katakana, basic grammar, and 100 essential kanji.", image: "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=800&q=80", features: ["40 Live Sessions", "12 Weeks Duration", "Small Groups (Max 10)", "Certificate Included"], price: 8500, color: "bg-black" },
-  { level: "N4", type: "individual", title: "Elementary Japanese", desc: "Advanced grammar, 200 more kanji, and conversational skills.", image: "https://images.unsplash.com/photo-1480796927426-f609979314bd?w=800&q=80", features: ["48 Live Sessions", "14 Weeks Duration", "Small Groups (Max 8)", "Certificate Included"], price: 9500, color: "bg-black" },
+  { level: "N5", type: "individual", title: "Beginner Japanese", desc: "Hiragana, katakana, basic grammar, and 100 essential kanji.", image: "/images/programs/n5-beginner.jpeg", features: ["40 Live Sessions", "12 Weeks Duration", "Small Groups (Max 10)", "Certificate Included"], price: 8500, color: "bg-black" },
+  { level: "N4", type: "individual", title: "Elementary Japanese", desc: "Advanced grammar, 200 more kanji, and conversational skills.", image: "/images/programs/n4-elementary.jpeg", features: ["48 Live Sessions", "14 Weeks Duration", "Small Groups (Max 8)", "Certificate Included"], price: 9500, color: "bg-black" },
   { level: "N3", type: "individual", title: "Intermediate Japanese", desc: "Complex grammar, 350 kanji, and fluent conversation practice.", image: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800&q=80", features: ["56 Live Sessions", "16 Weeks Duration", "Small Groups (Max 6)", "Certificate Included"], price: 12000, color: "bg-black" },
   { level: "N2", type: "individual", title: "Advanced Japanese", desc: "Business Japanese, 500+ kanji, and advanced comprehension.", image: "https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?w=800&q=80", features: ["64 Live Sessions", "20 Weeks Duration", "Small Groups (Max 5)", "Certificate Included"], price: 15000, featured: true, color: "bg-[#FF3000]" },
   { level: "N5+N4", type: "bundle", title: "Complete Beginner", desc: "Start from scratch and reach intermediate level in one package.", image: "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=80", features: ["88 Live Sessions", "26 Weeks Duration", "Small Groups", "2 Certificates"], price: 16000, originalPrice: 18000, color: "bg-[#FF3000]" },
@@ -67,9 +70,16 @@ const assistants = [
   { name: "Jareen Sensei", title: "Content Manager", role: "Learning materials & resources", image: "/images/jareen-sensei.jpg" },
 ]
 
-const partners = [
-  "ASJ × GIFU", "NIHONGO PRO", "OFW JAPAN", "KANJI LAB", "JLPT MASTERY", "TOKYO DRIFT", "SAKURA HOUSE", "OSAKA WORKS", "KYOTO CLASS", "HOKKAIDO HUB", "NAGOYA NEXT",
+const orgLogos = [
+  { src: "/logo-organization/canon_logo.png", alt: "Canon" },
+  { src: "/logo-organization/dfa_logo.png", alt: "DFA" },
+  { src: "/logo-organization/fsi_logo.png", alt: "FSI" },
+  { src: "/logo-organization/fujitsu_logo.png", alt: "Fujitsu" },
+  { src: "/logo-organization/ibm_logo.png", alt: "IBM" },
+  { src: "/logo-organization/nec_logo.png", alt: "NEC" },
+  { src: "/logo-organization/sumitomo_logo.png", alt: "Sumitomo" },
 ]
+const baseLogos = [...orgLogos, ...orgLogos.slice(0, 4)]
 
 const ofwPillars = [
   { icon: Briefcase, title: "Workplace Japanese & Keigo", desc: "Polite speech, factory & office phrases, interview Japanese. Sound natural on day one." },
@@ -221,10 +231,9 @@ export default function Page() {
           </div>
           <div className="relative overflow-hidden bg-[#F2F2F2] py-4">
             <div className="flex w-max gap-6 shrink-0 whitespace-nowrap will-change-transform" style={{ animation: "marquee 22s linear infinite" }}>
-              {[...partners, ...partners].map((p, i) => (
-                <span key={`${p}-${i}`} className="inline-flex shrink-0 whitespace-nowrap w-auto items-center gap-3 font-black uppercase tracking-tighter text-sm border-2 border-black bg-white px-4 py-2">
-                  <img src="/images/no-bg-logo.png" alt="" width={20} height={20} className="h-5 w-5 shrink-0 object-cover" aria-hidden />
-                  {p}
+              {[...baseLogos, ...baseLogos].map((logo, i) => (
+                <span key={`${logo.alt}-${i}`} className="inline-flex shrink-0 items-center justify-center border-2 border-black bg-white h-14 w-[160px] px-6 grayscale hover:grayscale-0 transition-all">
+                  <img src={logo.src} alt={logo.alt} width={120} height={40} className="h-8 w-auto max-w-[120px] object-contain shrink-0" loading="lazy" />
                 </span>
               ))}
             </div>
@@ -530,7 +539,7 @@ export default function Page() {
               <div className="lg:col-span-5">
                 <div className="bg-white text-black border-2 border-white p-6">
                   <div className="font-mono text-xs tracking-widest uppercase font-black text-[#FF3000]">DIAGNOSTIC TEASER</div>
-                  <div className="mt-2 font-black uppercase tracking-tighter text-2xl leading-none">YOUR TIER —<br />INSTANT</div>
+                  <div className="mt-2 font-black uppercase tracking-tighter text-2xl leading-none">YOUR TIER — INSTANT</div>
                   <p className="mt-3 text-sm font-medium opacity-70">Answer 10 questions → get exact course: N5 / N4 / N3 / N2 / Bundles. Client-side only, no signup.</p>
                   <a href="/placement" className="mt-6 inline-flex h-12 w-full items-center justify-center gap-2 bg-[#FF3000] text-white border-2 border-black uppercase font-black tracking-widest hover:bg-black transition-colors cursor-pointer"><ClipboardCheck size={16} strokeWidth={2.5} /> Start Full Diagnostic — 60s</a>
                   <a href="/DPF/sample-local-pdf.pdf" download className="mt-3 inline-flex h-12 w-full items-center justify-center gap-2 bg-black text-white border-2 border-black uppercase font-black tracking-widest hover:bg-white hover:text-black transition-colors cursor-pointer"><FileText size={16} strokeWidth={2} /> Download the PDF</a>
@@ -541,10 +550,37 @@ export default function Page() {
           </div>
         </section>
 
+        <section id="services" className="border-b-4 border-black bg-white">
+          <div className="mx-auto max-w-[1440px] px-5 md:px-8 lg:px-12 py-12 md:py-16 lg:py-20">
+            <div className="border-b-2 border-black pb-6">
+              <div className="font-mono text-xs tracking-widest uppercase font-black text-[#FF3000]">10 — SERVICES</div>
+              <h2 className="mt-2 uppercase font-black tracking-tighter leading-none text-[36px] md:text-[52px]">OUR SERVICES</h2>
+              <p className="mt-2 font-medium max-w-[70ch]">Six core services — from JLPT to corporate — all precise, all human. Pick your level, we handle the rest. Every card links to contact.</p>
+            </div>
+            <div className="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[
+                { icon: GraduationCap, title: "JLPT Group Class", desc: "Dynamic JLPT Group Classes for N5 to N2 Proficiency Levels." },
+                { icon: Globe, title: "JLPT Online Class", desc: "Interactive Online JLPT Group Classes: N5 to N2 Proficiency Levels." },
+                { icon: Plane, title: "Study in Japan", desc: "Free consultation and support to those who want to study in Japan." },
+                { icon: Languages, title: "Translation", desc: "Efficient, Accurate Translation Service. Tailored to Your Needs." },
+                { icon: Mic, title: "Interpretation", desc: "Seamless Interpretation Services for Clear Communication. Expertly Multilingual Interpreters." },
+                { icon: Briefcase, title: "Corporate Training", desc: "Premium Language Solutions for Corporate Accounts. Tailored to Your Business." },
+              ].map((s) => (
+                <a key={s.title} href="#contact" className="group flex flex-col border-2 border-black bg-white p-6 hover:bg-black hover:text-white transition-colors cursor-pointer">
+                  <span className="h-10 w-10 grid place-items-center border-2 border-black bg-[#FF3000] text-white group-hover:bg-white group-hover:text-black shrink-0"><s.icon size={18} strokeWidth={2} /></span>
+                  <h3 className="mt-4 font-black uppercase tracking-tighter leading-none text-[16px]">{s.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed opacity-80 font-medium flex-1">{s.desc}</p>
+                  <span className="mt-4 inline-flex h-9 items-center gap-1.5 border-2 border-black bg-black text-white px-3 font-mono text-xs font-black uppercase tracking-widest group-hover:bg-white group-hover:text-black">Contact <ArrowUpRight size={12} strokeWidth={2.5} /></span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section id="contact" className="bg-[#F2F2F2] swiss-grid-pattern">
           <div className="mx-auto max-w-[1440px] px-5 md:px-8 lg:px-12 py-12 md:py-16 lg:py-20">
             <div className="border-l-4 border-black pl-6">
-              <div className="font-mono text-xs tracking-widest uppercase font-black text-[#FF3000]">10 — CONTACT</div>
+              <div className="font-mono text-xs tracking-widest uppercase font-black text-[#FF3000]">11 — CONTACT</div>
               <h2 className="mt-2 uppercase font-black tracking-tighter leading-none text-[40px] md:text-[56px]">START YOUR JOURNEY</h2>
               <p className="mt-3 font-medium">Have questions? We&apos;d love to hear from you. Send us a message — objective reply in 24h.</p>
             </div>
@@ -620,7 +656,7 @@ export default function Page() {
                 <img src="/images/no-bg-logo.png" alt="ASJ logo" width={36} height={36} className="h-9 w-9 object-cover border-2 border-white" />
                 <span className="font-black uppercase tracking-tighter">ASJ ACADEMY</span>
               </div>
-              <p className="mt-3 max-w-[420px] text-sm leading-relaxed text-white/60 font-medium">Your trusted partner in mastering Japanese language online. Join thousands of successful students worldwide. Objective. Precise. Swiss.</p>
+              <p className="mt-3 max-w-[420px] text-sm leading-relaxed text-white/60 font-medium">Your trusted partner in mastering Japanese language online. Join thousands of successful students worldwide. Objective. Precise.</p>
             </div>
             <div className="md:col-span-2">
               <h4 className="font-mono text-xs tracking-widest uppercase font-black text-[#FF3000]">Quick Links</h4>
