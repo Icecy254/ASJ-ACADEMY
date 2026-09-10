@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { MessageCircle } from "lucide-react";
+import { LikeWidget } from "./components/LikeWidget";
 import "./globals.css";
 
 const inter = Inter({
@@ -20,6 +21,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="en" className={`${inter.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-white text-black swiss-noise">
         {children}
+        <LikeWidget />
         <a
           href="https://m.me/archeesensei"
           target="_blank"

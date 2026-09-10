@@ -29,6 +29,9 @@ import {
   Globe,
   Plane,
   Mic,
+  RefreshCw,
+  Infinity,
+  
 } from "lucide-react"
 
 const courses = [
@@ -99,6 +102,26 @@ const reels = [
   { url: "https://www.facebook.com/reel/2077905009760006", label: "JLPT Listening Hack", thumb: "/images/thumbnail132145.png" },
 ]
 
+const faqs = [
+  { q: "Do I need any prior knowledge to start learning Japanese?", a: "No. N5 Beginner starts from zero — Hiragana, Katakana, 100 kanji, and particles は・が・を in 40 live sessions (12 weeks, Max 10, certificate). If you aim for N4 quickly, take the N5+N4 bundle (88 sessions, save ₱2k) or try our 60-sec placement." },
+  { q: "What makes ASJ Academy different from other Japanese language schools in the Philippines?", a: "Archee Sensei lives in Gifu, 15 years teaching, JLPT N1. We are private small Max 5–10 (not 50), targeted particle to ~zaru wo enai and passive, practical for OFWs — baito keigo, city hall, housing — plus same-day Facebook answers and TikTok 20.5K/118.5K community." },
+  { q: "Which Japanese course is best for beginners?", a: "N5 Beginner Japanese (40 sessions, 12 weeks, Max 10, ₱8,500) if you start zero. Want N4 in one run? N5+N4 Complete Beginner bundle (88 sessions, 26 weeks, 2 certificates, ₱16,000). Not sure — take placement diagnostic." },
+  { q: "Should I choose group classes or 1-on-1 Japanese lessons?", a: "We run private small groups Max 10 → 5 (peer motivation + same-day FB support). 1-on-1 only for irregular OFW shifts. N2 Max 5 is near 1-on-1 attention with 13 expert senseis." },
+  { q: "How long does it take to learn basic Japanese (N5 level)?", a: "N5 is 12 weeks (40 live sessions, 3–4 per week plus homework). After that N4 14 weeks, N3 16 weeks, N2 20 weeks. Private schedule can extend for OFWs — we adjust via Facebook." },
+  { q: "Are there any guarantees on your JLPT courses?", a: "No false pass guarantee. We deliver 98% pass rate, 15+ years structured, small groups, certificate, and LMS support (Hannah/Belen/Emille/Jareen). Plus Free Retake — sit in next same-level batch once free. See Guarantee section." },
+  { q: "Can I join your Japanese classes from anywhere in the Philippines?", a: "Yes — 100% private online via Facebook + LMS. Base is Gifu, Japan for OFWs, but learners anywhere in the Philippines (or worldwide) join N5–N2 live. Contact archeevlog2023@gmail.com / +81 90-5492-3865." },
+  { q: "How can I request class schedules, tuition fees, and enrollment information?", a: "Message on Facebook https://www.facebook.com/share/1Fa1jL3ScZ/ (primary per profile) or use Start Your Journey form — 24h reply. Fees ₱8,500–₱19,500 in Programs, bundles save. Guided by step-by-step enrollment video + m.me/archeesensei Messenger float." },
+]
+
+const voices = [
+  { quote: "Archee Sensei explained は vs が in 60 seconds — I passed N5 while working in Gifu. Private Max 10, questions answered same day on Facebook.", name: "Mark D. — OFW, Gifu", level: "N5", year: 2024, avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80", tag: "Baito Keigo • Conbini" },
+  { quote: "N4 keigo for baito interviews — I stopped mixing polite and casual. 48 live sessions with real city-hall vocabulary, not textbook.", name: "Jenna R. — OFW, Nagoya", level: "N4", year: 2024, avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80", tag: "Visa & City Hall" },
+  { quote: "City hall and housing procedures in Gifu — My Number, contracts, all the practical phrases Archee taught via TikTok then drilled privately.", name: "Maria S. — OFW, Gifu", level: "N3", year: 2023, avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80", tag: "Housing • Ward Office" },
+  { quote: "Business Japanese plus 〜ざるをえない and passive — I got promoted to seishain. Small group Max 5, dense but clear.", name: "Kenji T. — OFW, Aichi", level: "N2", year: 2024, avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80", tag: "Business • Promotion" },
+  { quote: "Bundle N5+N4 saved me time and money — from hiragana to reading manga in one path. Private, structured, Facebook support.", name: "Liza P. — Beginner, Manila", level: "N5+N4", year: 2023, avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&q=80", tag: "Bundle • Value" },
+  { quote: "Part-time baito to full-time seishain — Archee taught black-company avoidance and interview keigo. OFW community in Gifu helped.", name: "Rodel F. — OFW, Nagoya", level: "N3→N2", year: 2023, avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80", tag: "OFW • Career" },
+]
+
 export default function Page() {
   const [mobile, setMobile] = useState(false)
   const originalBio = [
@@ -111,6 +134,8 @@ export default function Page() {
   ]
   const [isJa, setIsJa] = useState(false)
   const founderBio = isJa ? jaBio : originalBio
+  const [openFaq, setOpenFaq] = useState<number | null>(0)
+  const [isVideo, setIsVideo] = useState(false)
   const carouselRef = useRef<HTMLDivElement>(null)
 
   const toggleFounder = () => setIsJa((v) => !v)
@@ -135,6 +160,7 @@ export default function Page() {
             <a href="#senseis" className="px-4 py-2 border-2 border-transparent hover:border-black hover:bg-black hover:text-white uppercase text-sm font-black tracking-wide transition-colors">Senseis</a>
             <a href="#jlpt-passers" className="px-4 py-2 border-2 border-transparent hover:border-black hover:bg-black hover:text-white uppercase text-sm font-black tracking-wide transition-colors">Passers</a>
             <a href="/placement" className="px-4 py-2 border-2 border-black bg-[#FF3000] text-white uppercase text-sm font-black tracking-wide hover:bg-black transition-colors">Placement</a>
+            <a href="#faq" className="px-4 py-2 border-2 border-transparent hover:border-black hover:bg-black hover:text-white uppercase text-sm font-black tracking-wide transition-colors">FAQ</a>
             <a href="#contact" className="px-4 py-2 border-2 border-transparent hover:border-black hover:bg-black hover:text-white uppercase text-sm font-black tracking-wide transition-colors">Contact</a>
             <a href="#contact" className="ml-2 inline-flex h-11 items-center gap-2 bg-black text-white px-6 uppercase text-sm font-black tracking-widest hover:bg-[#FF3000] transition-colors cursor-pointer"> <GraduationCap size={16} strokeWidth={2} /> Student</a>
           </nav>
@@ -151,6 +177,7 @@ export default function Page() {
                 ["Senseis", "#senseis"],
                 ["JLPT Passers", "#jlpt-passers"],
                 ["Placement", "/placement"],
+                ["FAQ", "#faq"],
                 ["Contact", "#contact"],
               ].map(([l, h]) => (
                 <a key={l} onClick={() => setMobile(false)} href={h} className="border-2 border-black px-4 py-3 uppercase font-black tracking-widest hover:bg-black hover:text-white transition-colors">{l}</a>
@@ -198,7 +225,7 @@ export default function Page() {
 
               <div className="lg:col-span-5 relative bg-[#F2F2F2] swiss-grid-pattern flex flex-col">
                 <div className="group flex-1 relative min-h-[480px] lg:min-h-[640px] border-black overflow-hidden">
-                  <img src="https://images.unsplash.com/photo-1528164344705-47542687000d?w=1000&q=80" alt="Japanese classroom cultural scene" width={1000} height={1200} className="absolute inset-0 h-full w-full object-cover object-right grayscale contrast-125 group-hover:grayscale-0 group-hover:contrast-100 transition-all duration-300" loading="eager" style={{ objectPosition: "right center" }} />
+                  <img src="/hero/hero.jpeg" alt="ASJ Academy hero — Japanese classroom" width={1000} height={1200} className="absolute inset-0 h-full w-full object-cover object-center grayscale contrast-125 group-hover:grayscale-0 group-hover:contrast-100 transition-all duration-300" loading="eager" style={{ objectPosition: "center center" }} />
                   <div className="absolute inset-0 bg-black/10" aria-hidden />
                   <div className="absolute top-6 left-6 bg-white border-2 border-black px-4 py-2 flex items-center gap-2">
                     <span className="h-2 w-2 bg-[#FF3000] animate-pulse" /> <span className="font-mono text-xs tracking-widest uppercase font-black">Trusted by OFWs</span>
@@ -301,6 +328,22 @@ export default function Page() {
                 </div>
               </div>
             </div>
+            <div className="mt-8 grid lg:grid-cols-12 gap-0 border-2 border-black">
+              <div className="lg:col-span-12 bg-white p-2">
+                <div className="relative aspect-video border-2 border-black bg-[#F2F2F2] overflow-hidden group">
+                {!isVideo ? (
+                  <button onClick={() => setIsVideo(true)} aria-label="Play Founder video" className="absolute inset-0 w-full h-full">
+                    <img src="/video-thumbnail.png" alt="Archee Sensei video thumbnail" width={1280} height={720} className="h-full w-full object-cover grayscale group-hover:grayscale-0 transition-all" loading="lazy" />
+                    <span className="absolute inset-0 grid place-items-center bg-black/30 group-hover:bg-black/10 transition-colors">
+                      <span className="grid h-16 w-16 place-items-center rounded-full bg-white border-2 border-black group-hover:bg-[#FF3000] group-hover:text-white transition-colors"><Play size={24} fill="currentColor" className="ml-1" /></span>
+                    </span>
+                  </button>
+                ) : (
+                  <iframe src="https://www.youtube.com/embed/zBYedupjdNw?autoplay=1&rel=0&modestbranding=1" title="Archee Sensei — Founder video" className="absolute inset-0 h-full w-full" allow="autoplay; encrypted-media; picture-in-picture" allowFullScreen loading="lazy" referrerPolicy="strict-origin-when-cross-origin" />
+                )}
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -346,6 +389,38 @@ export default function Page() {
                   <div className="text-sm leading-tight font-black uppercase tracking-wide">OFW Community • Real lessons<br /><span className="font-mono text-xs tracking-widest opacity-80">Not textbook. Real Japan.</span></div>
                 </div>
                 <div className="hidden lg:grid absolute -bottom-6 -right-6 h-20 w-20 bg-white border-2 border-black place-items-center font-black text-black text-2xl">語</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="achievements" className="border-b-4 border-black bg-white">
+          <div className="mx-auto max-w-[1440px] px-5 md:px-8 lg:px-12 py-10 md:py-12">
+            <div className="flex flex-wrap items-center gap-3 border-b-2 border-black pb-4">
+              <span className="h-1 w-8 bg-[#FF3000]" aria-hidden />
+              <span className="font-mono text-xs tracking-widest uppercase font-black text-[#FF3000]">03-B — ACHIEVEMENTS</span>
+              <h2 className="ml-2 font-black uppercase tracking-tighter text-[22px] md:text-[28px]">Achievements in Japanese Language Education</h2>
+            </div>
+            <div className="mt-6 grid grid-cols-2 lg:grid-cols-4 gap-0 border-2 border-black bg-black">
+              <div className="p-6 text-center bg-white border-r-2 border-b-2 lg:border-b-0">
+                <div className="font-black tracking-tighter text-[36px] md:text-[42px] leading-none">15+</div>
+                <div className="mt-1 font-mono text-[10px] tracking-widest uppercase font-black opacity-60">Years Experience</div>
+                <div className="mt-1 font-mono text-[9px] tracking-widest uppercase opacity-40">Institutional — Since 2010</div>
+              </div>
+              <div className="p-6 text-center bg-white border-b-2 lg:border-b-0 lg:border-r-2 border-black">
+                <div className="font-black tracking-tighter text-[36px] md:text-[42px] leading-none">350+</div>
+                <div className="mt-1 font-mono text-[10px] tracking-widest uppercase font-black opacity-60">Students Trained</div>
+                <div className="mt-1 font-mono text-[9px] tracking-widest uppercase opacity-40">Active Private Learners</div>
+              </div>
+              <div className="p-6 text-center bg-white border-r-2 border-black">
+                <div className="font-black tracking-tighter text-[36px] md:text-[42px] leading-none">100+</div>
+                <div className="mt-1 font-mono text-[10px] tracking-widest uppercase font-black opacity-60">Companies & Organizations</div>
+                <div className="mt-1 font-mono text-[9px] tracking-widest uppercase opacity-40">Served</div>
+              </div>
+              <div className="p-6 text-center bg-white">
+                <div className="font-black tracking-tighter text-[36px] md:text-[42px] leading-none">30+</div>
+                <div className="mt-1 font-mono text-[10px] tracking-widest uppercase font-black opacity-60">Countries</div>
+                <div className="mt-1 font-mono text-[9px] tracking-widest uppercase opacity-40">Represented</div>
               </div>
             </div>
           </div>
@@ -425,13 +500,52 @@ export default function Page() {
           </div>
         </section>
 
+        <section id="voices" className="border-b-4 border-black bg-[#F2F2F2] swiss-diagonal">
+          <div className="mx-auto max-w-[1440px] px-5 md:px-8 lg:px-12 py-12 md:py-16 lg:py-20">
+            <div className="flex flex-wrap items-end justify-between gap-4 border-b-2 border-black pb-6">
+              <div>
+                <div className="font-mono text-xs tracking-widest uppercase font-black text-[#FF3000]">06 — VOICES</div>
+                <h2 className="mt-2 uppercase font-black tracking-tighter leading-none text-[40px] md:text-[52px]">FROM N5 TO N2<br />REAL VOICES</h2>
+                <p className="mt-2 font-medium max-w-[60ch]">Filipino learners & OFWs in Japan — practical Japanese that passed. Private, small groups, Archee Sensei.</p>
+              </div>
+              <span className="hidden md:inline-flex font-mono text-xs tracking-widest uppercase font-black border-2 border-black px-3 py-1.5 bg-white">Archee Sensei • Gifu • 15+ Years</span>
+            </div>
+            <div className="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-0 border-2 border-black bg-black">
+              {voices.map((v) => (
+                <article key={v.name} className="group bg-white flex flex-col border-black p-6 hover:bg-black hover:text-white transition-colors duration-200 border-b-2 md:border-r-2 [&:nth-child(3n)]:md:border-r-0 [&:nth-last-child(-n+1)]:border-b-0 md:[&:nth-last-child(-n+3)]:border-b-0">
+                  <div className="h-2 w-full bg-[#FF3000]" />
+                  <div className="mt-3 flex items-center gap-1.5 font-mono text-[10px] tracking-widest uppercase font-black">
+                    <span className="text-[#FF3000] group-hover:text-white">★★★★★</span>
+                  </div>
+                  <div className="mt-4 flex gap-2">
+                    <span className="text-[#FF3000] group-hover:text-white font-black text-2xl leading-none">“</span>
+                    <p className="text-[15px] leading-relaxed font-medium flex-1">{v.quote}</p>
+                  </div>
+                  <div className="mt-6 flex gap-4 items-center border-t-2 border-black pt-4">
+                    <div className="h-12 w-12 border-2 border-black overflow-hidden bg-[#F2F2F2] shrink-0">
+                      <img src={v.avatar} alt={v.name} width={400} height={400} loading="lazy" className="h-full w-full object-cover grayscale group-hover:grayscale-0 transition-all" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="font-black uppercase tracking-tighter text-sm leading-none truncate">{v.name}</div>
+                      <div className="mt-1 flex items-center gap-2">
+                        <span className="bg-[#FF3000] text-white border-2 border-black px-2 py-1 font-mono text-[10px] font-black uppercase tracking-widest group-hover:bg-white group-hover:text-black">JLPT {v.level}</span>
+                        <span className="font-mono text-xs tracking-widest uppercase opacity-60">{v.year}</span>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section id="social" className="border-b-4 border-black bg-black text-white">
           <div className="mx-auto max-w-[1440px] px-5 md:px-8 lg:px-12 py-12 md:py-16 lg:py-20">
             <div className="flex flex-wrap items-end justify-between gap-4 border-b-2 border-white/20 pb-6">
               <div>
-                <div className="font-mono text-xs tracking-widest uppercase font-black text-[#FF3000]">06 — SOCIAL</div>
-                <h2 className="mt-2 uppercase font-black tracking-tighter leading-none text-[36px] md:text-[48px] text-white">VIDEO CLASSROOM<br />CAROUSEL</h2>
-                <p className="mt-2 text-white/60 font-medium max-w-[60ch]">Bite-sized lesson previews from our 20K+ TikTok base. Swipe — then enroll. Reels as below (placeholders, repeatable).</p>
+                <div className="font-mono text-xs tracking-widest uppercase font-black text-[#FF3000]">07 — SOCIAL</div>
+                <h2 className="mt-2 uppercase font-black tracking-tighter leading-none text-[36px] md:text-[48px] text-white">CLASSROOM IN<br />MOTION</h2>
+                <p className="mt-2 text-white/60 font-medium max-w-[60ch]">Educational short dramas from our 20.5K TikTok — N5 Grammar playlist to N2 ~zaru wo enai. Preview particle to passive, conbini keigo to Kanji Story, then dive deeper on YouTube and enroll via our Facebook community.</p>
               </div>
               <div className="flex gap-2">
                 <button onClick={() => scrollCarousel(-1)} aria-label="Previous" className="h-11 w-11 grid place-items-center border-2 border-white bg-black hover:bg-white hover:text-black transition-colors cursor-pointer"><ChevronLeft size={18} strokeWidth={2.5} /></button>
@@ -467,10 +581,15 @@ export default function Page() {
 
         <section id="senseis" className="border-b-4 border-black bg-[#F2F2F2] swiss-grid-pattern">
           <div className="mx-auto max-w-[1440px] px-5 md:px-8 lg:px-12 py-12 md:py-16 lg:py-20">
-            <div className="max-w-[720px] border-l-4 border-black pl-6 bg-white p-6 border-2 border-black">
-              <div className="font-mono text-xs tracking-widest uppercase font-black text-[#FF3000]">07 — INSTRUCTORS</div>
-              <h2 className="mt-2 uppercase font-black tracking-tighter leading-none text-[40px] md:text-[52px]">OUR EXPERT SENSEIS</h2>
-              <p className="mt-3 font-medium">Learn from native-level instructors with years of JLPT teaching experience. Neutral, objective, relentless.</p>
+            <div className="flex flex-wrap items-end justify-between gap-4 border-b-2 border-black pb-6">
+              <div>
+                <div className="font-mono text-xs tracking-widest uppercase font-black text-[#FF3000]">08 — INSTRUCTORS</div>
+                <h2 className="mt-2 uppercase font-black tracking-tighter leading-none text-[40px] md:text-[52px]">OUR EXPERT SENSEIS</h2>
+                <p className="mt-3 font-medium">Learn from native-level instructors with years of JLPT teaching experience. Neutral, objective, relentless.</p>
+              </div>
+              <button className="hidden md:inline-flex h-11 items-center gap-2 bg-white border-2 border-black px-6 uppercase font-black tracking-widest text-sm hover:bg-black hover:text-white transition-colors cursor-pointer">
+                Our story <ArrowUpRight size={16} strokeWidth={2.5} />
+              </button>
             </div>
             <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-0 border-2 border-black bg-black">
               {senseis.map((s) => (
@@ -496,7 +615,7 @@ export default function Page() {
         <section id="assistants" className="border-b-4 border-black bg-white">
           <div className="mx-auto max-w-[1440px] px-5 md:px-8 lg:px-12 py-12 md:py-16 lg:py-20">
             <div className="border-b-2 border-black pb-6">
-              <div className="font-mono text-xs tracking-widest uppercase font-black text-[#FF3000]">08 — SUPPORT</div>
+              <div className="font-mono text-xs tracking-widest uppercase font-black text-[#FF3000]">09 — SUPPORT</div>
               <h2 className="mt-2 uppercase font-black tracking-tighter leading-none text-[40px] md:text-[52px]">THE ASSISTANT SENSEIS</h2>
               <p className="mt-2 font-medium">Dedicated team for technology, assignments, student support — the grid behind the grid.</p>
             </div>
@@ -523,7 +642,7 @@ export default function Page() {
           <div className="mx-auto max-w-[1440px] px-5 md:px-8 lg:px-12 py-12 md:py-16 lg:py-20">
             <div className="grid lg:grid-cols-12 gap-8 items-start">
               <div className="lg:col-span-7">
-                <div className="font-mono text-xs tracking-widest uppercase font-black text-[#FF3000]">09 — PLACEMENT</div>
+                <div className="font-mono text-xs tracking-widest uppercase font-black text-[#FF3000]">10 — PLACEMENT</div>
                 <h2 className="mt-2 uppercase font-black tracking-tighter leading-none text-[40px] md:text-[52px] text-white">FIND YOUR<br />LEVEL — 60 SEC</h2>
                 <p className="mt-3 text-white/70 font-medium leading-relaxed">10 yes/no questions. Instant tier: N5→N2. No overselling. Takes 60 seconds on the dedicated diagnostic portal.</p>
                 <div className="mt-6 bg-white text-black border-2 border-white p-6">
@@ -553,7 +672,7 @@ export default function Page() {
         <section id="services" className="border-b-4 border-black bg-white">
           <div className="mx-auto max-w-[1440px] px-5 md:px-8 lg:px-12 py-12 md:py-16 lg:py-20">
             <div className="border-b-2 border-black pb-6">
-              <div className="font-mono text-xs tracking-widest uppercase font-black text-[#FF3000]">10 — SERVICES</div>
+              <div className="font-mono text-xs tracking-widest uppercase font-black text-[#FF3000]">11 — SERVICES</div>
               <h2 className="mt-2 uppercase font-black tracking-tighter leading-none text-[36px] md:text-[52px]">OUR SERVICES</h2>
               <p className="mt-2 font-medium max-w-[70ch]">Six core services — from JLPT to corporate — all precise, all human. Pick your level, we handle the rest. Every card links to contact.</p>
             </div>
@@ -577,10 +696,72 @@ export default function Page() {
           </div>
         </section>
 
+        <section id="faq" className="border-b-4 border-black bg-white">
+          <div className="mx-auto max-w-[1440px] px-5 md:px-8 lg:px-12 py-12 md:py-16 lg:py-20">
+            <div className="grid lg:grid-cols-12 gap-0 border-2 border-black bg-black">
+              <div className="lg:col-span-5 bg-black text-white p-6 md:p-8 flex flex-col swiss-grid-pattern">
+                <div className="font-mono text-xs tracking-widest uppercase font-black text-[#FF3000]">12 — FAQ</div>
+                <h2 className="mt-2 uppercase font-black tracking-tighter leading-none text-[36px] md:text-[44px]">REAL ANSWERS</h2>
+                <p className="mt-3 text-white/70 font-medium leading-relaxed max-w-[60ch]">8 questions — no sales pitch. Practical, structured, OFW-first. Tap to open.</p>
+                <div className="mt-6 inline-flex items-center gap-2 border-2 border-white bg-white text-black px-4 py-2 font-mono text-xs tracking-widest uppercase font-black">08 Questions • No signup</div>
+                <div className="mt-auto pt-8 hidden lg:flex items-center gap-3 font-mono text-xs tracking-widest uppercase font-black text-white/60"><span className="h-px w-10 bg-white/20" /> Have more? Contact us</div>
+              </div>
+              <div className="lg:col-span-7 bg-white divide-y-2 divide-black">
+                {faqs.map((f, i) => {
+                  const isOpen = openFaq === i
+                  return (
+                    <div key={f.q} className={`bg-white ${isOpen ? "bg-black text-white" : "hover:bg-black hover:text-white"} transition-colors`}>
+                      <button onClick={() => setOpenFaq(isOpen ? null : i)} aria-expanded={isOpen} aria-controls={`faq-a-${i}`} className="w-full flex items-center justify-between gap-4 p-5 md:p-6 text-left">
+                        <span className="font-black uppercase tracking-tighter text-sm md:text-[15px] leading-tight flex-1">{f.q}</span>
+                        <span className={`h-10 w-10 shrink-0 grid place-items-center border-2 border-black ${isOpen ? "bg-white text-black rotate-45" : "bg-[#FF3000] text-white"} transition-all`}>
+                          <Plus size={16} strokeWidth={2.5} className={`transition-transform duration-200 ${isOpen ? "rotate-0" : "rotate-0"}`} aria-hidden="true" />
+                        </span>
+                      </button>
+                      <div id={`faq-a-${i}`} hidden={!isOpen} className="border-t-2 border-black bg-[#F2F2F2] text-black p-5 md:p-6 text-[15px] leading-relaxed font-medium">
+                        {f.a}
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="guarantee" className="border-b-4 border-black bg-black text-white">
+          <div className="mx-auto max-w-[1440px] px-5 md:px-8 lg:px-12 py-12 md:py-16 lg:py-20">
+            <div className="flex flex-wrap items-end justify-between gap-4 border-b-2 border-white/20 pb-6">
+              <div>
+                <div className="font-mono text-xs tracking-widest uppercase font-black text-[#FF3000]">13 — GUARANTEE</div>
+                <h2 className="mt-2 uppercase font-black tracking-tighter leading-none text-[36px] md:text-[52px]">ASJ JAPANESE LANGUAGE<br />COURSE GUARANTEE</h2>
+              </div>
+              <span className="hidden md:inline-flex font-mono text-xs tracking-widest uppercase font-black border-2 border-white px-3 py-1.5 bg-white text-black">Risk-free</span>
+            </div>
+            <div className="mt-8 grid md:grid-cols-2 gap-0 border-2 border-white bg-black">
+              <div className="p-6 md:p-8 bg-white text-black flex gap-4">
+                <span className="h-10 w-10 grid place-items-center border-2 border-black bg-[#FF3000] text-white shrink-0"><RefreshCw size={18} strokeWidth={2} /></span>
+                <div className="flex-1">
+                  <h3 className="font-black uppercase tracking-tighter text-[16px] leading-none">Free Class Retake Guarantee</h3>
+                  <p className="mt-1 font-mono text-xs tracking-widest uppercase font-black opacity-60">2nd batch free sit in</p>
+                  <p className="mt-3 text-sm leading-relaxed font-medium">Didn’t pass or need more time? Sit in the next same-level batch once free — same small group, subject to schedule via Facebook. No extra tuition.</p>
+                </div>
+              </div>
+              <div className="p-6 md:p-8 bg-white text-black flex gap-4 border-t-2 md:border-t-0 md:border-l-2 border-black">
+                <span className="h-10 w-10 grid place-items-center border-2 border-black bg-[#FF3000] text-white shrink-0"><Infinity size={18} strokeWidth={2} /></span>
+                <div className="flex-1">
+                  <h3 className="font-black uppercase tracking-tighter text-[16px] leading-none">Lifetime Access</h3>
+                  <p className="mt-1 font-mono text-xs tracking-widest uppercase font-black opacity-60">Learning materials & recorded videos</p>
+                  <p className="mt-3 text-sm leading-relaxed font-medium">All handouts plus recorded live sessions and Kanji Story shorts stay in LMS & private Facebook — lifetime, rewatch any time.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section id="contact" className="bg-[#F2F2F2] swiss-grid-pattern">
           <div className="mx-auto max-w-[1440px] px-5 md:px-8 lg:px-12 py-12 md:py-16 lg:py-20">
             <div className="border-l-4 border-black pl-6">
-              <div className="font-mono text-xs tracking-widest uppercase font-black text-[#FF3000]">11 — CONTACT</div>
+              <div className="font-mono text-xs tracking-widest uppercase font-black text-[#FF3000]">14 — CONTACT</div>
               <h2 className="mt-2 uppercase font-black tracking-tighter leading-none text-[40px] md:text-[56px]">START YOUR JOURNEY</h2>
               <p className="mt-3 font-medium">Have questions? We&apos;d love to hear from you. Send us a message — objective reply in 24h.</p>
             </div>
